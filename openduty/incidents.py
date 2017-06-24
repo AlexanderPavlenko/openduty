@@ -24,6 +24,7 @@ from notification.helper import NotificationHelper
 from openduty.tasks import unsilence_incident
 import uuid
 import base64
+import json
 
 from .tables import IncidentTable
 
@@ -111,7 +112,7 @@ class IncidentViewSet(viewsets.ModelViewSet):
 
                 incident.event_type = request.DATA["event_type"]
                 incident.description = request.DATA["description"][:100]
-                incident.details = request.DATA.get("details", "")
+                incident.details = json.dumps(request.DATA.get("details", ""))
                 incident.occurred_at = timezone.now()
                 try:
                     incident.full_clean()

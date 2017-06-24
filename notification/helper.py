@@ -51,7 +51,7 @@ class NotificationHelper(object):
                     notification.notifier = method.method
                     notification.send_at = notify_at
                     uri = settings.BASE_URL + "/incidents/details/" + str(incident.id)
-                    notification.message = "A Service is experiencing a problem: " + incident.incident_key + " " + incident.description + ". Handle at: " + uri + " Details: " + incident.details
+                    notification.message = (uri + " | " + incident.description + " | " + incident.details)[:499]
 
                     notifications.append(notification)
 
